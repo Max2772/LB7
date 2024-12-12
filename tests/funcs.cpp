@@ -16,7 +16,7 @@ long long readIntegerInLine(){ // O(n), n - длина ввода;
     return number;
 }
 
-void solve(long long a, int b){
+void solve(long long a, int b){ // O(log(n)), n - целое число, введеное пользователем
     int k = a; 
     int c = (b + 1) >> 1; 
     while (a > b)
