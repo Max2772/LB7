@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int readIntegerInLine(){ // O(n), n - длина ввода;
+int readIntegerInLine(){ // O(n), n - длина ввода.
     int number;
     if(!(cin >> number) || (cin.peek() != '\n'))
     {
@@ -16,7 +16,7 @@ int readIntegerInLine(){ // O(n), n - длина ввода;
     return number;
 }
 
-int cntOnes(int n){
+int cntOnes(int n){ // O(log(n)), где n — значение числа.
     int cnt = 0;
     while(n){
         cnt += (n & 1);
@@ -25,7 +25,7 @@ int cntOnes(int n){
     return cnt;
 }
 
-void FillGroups(vector<int>& groups){
+void FillGroups(vector<int>& groups){ // O(m * log(m)), где m — количество итераций цикла(29).
     groups.push_back(0);
     groups.push_back(32);
     for(int i = 1; i <= 29; ++i){
@@ -49,7 +49,7 @@ void FillGroups(vector<int>& groups){
     }
 }
 
-vector<int> getOneBit(int n){
+vector<int> getOneBit(int n){ // O(log(n)), где n — значение числа.
     vector<int> indexs;
     int idx = 0;
     while(n){
@@ -60,7 +60,7 @@ vector<int> getOneBit(int n){
     return indexs;
 }
 
-void checkGroup(const vector<int> &groups, vector<bool> &slaves, const vector<bool> &barrels){
+void checkGroup(const vector<int> &groups, vector<bool> &slaves, const vector<bool> &barrels){ // O(g * b * o), где g — количество групп, b — бочки в группе, o — количество единиц в двоичном представлении индекса.
     for(int i = 0; i <= groups.size(); ++i){
         vector<int> Ones = getOneBit(i);
         for(int k = groups[i]; k < groups[i + 1]; ++k){
@@ -73,7 +73,7 @@ void checkGroup(const vector<int> &groups, vector<bool> &slaves, const vector<bo
     }
 }
 
-int getGroup(const vector<bool>& slaves){
+int getGroup(const vector<bool>& slaves){ // O(s), где s — количество рабов.
     int result = 0, multiplier = 1;
     for(bool slave : slaves){
         result += slave * multiplier;
@@ -82,7 +82,7 @@ int getGroup(const vector<bool>& slaves){
     return result;
 }
 
-vector<int> killSlaves(vector<bool>& slaves){
+vector<int> killSlaves(vector<bool>& slaves){ // O(s^2), где s — количество рабов.
     vector<int> alive_idx;
     for(int i = 0, j = 1; i < slaves.size(); ++j){
         if(slaves[i]){
@@ -96,7 +96,7 @@ vector<int> killSlaves(vector<bool>& slaves){
     return alive_idx;
 }
 
-vector<int> killSlavesDay2(vector<int> &alive_idx, vector<bool> slaves){
+vector<int> killSlavesDay2(vector<int> &alive_idx, vector<bool> slaves){ // O(s^2), где s — количество рабов.
     for(int i = 0; i < slaves.size();){
         if(slaves[i]){
             slaves.erase(slaves.begin() + i);
@@ -109,7 +109,7 @@ vector<int> killSlavesDay2(vector<int> &alive_idx, vector<bool> slaves){
 }
 
 
-void findBarrel(int groupNumber, const vector<int>& groups, vector<bool>& slaves, const vector<bool>& barrels){
+void findBarrel(int groupNumber, const vector<int>& groups, vector<bool>& slaves, const vector<bool>& barrels){ // O(b * o), где b — количество бочек в группе, o — количество единиц в i.
     for(int k = groups[groupNumber], i = 0; k < groups[groupNumber+1]; ++k, ++i){
         vector<int> Ones = getOneBit(i);
         for(int slave : Ones){
