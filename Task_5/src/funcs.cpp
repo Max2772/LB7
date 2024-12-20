@@ -51,7 +51,7 @@ vector<int> getOneBit(int n){ // O(log(n)), где n — значение чис
 }
 
 void checkGroup(const vector<int> &groups, vector<bool> &slaves, const vector<bool> &barrels){ // O(g * b * o), где g — количество групп, b — бочки в группе, o — количество единиц в двоичном представлении индекса.
-    for(int i = 0; i <= groups.size(); ++i){
+    for(int i = 0; i <= groups.size() - 1; ++i){
         vector<int> Ones = getOneBit(i);
         for(int k = groups[i]; k < groups[i + 1]; ++k){
             for(int slave : Ones){
